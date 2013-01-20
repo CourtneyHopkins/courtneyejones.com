@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cojo</title>
+  <%= stylesheet_link_tag "application", "admin_main" %>
+  <%= javascript_include_tag "application", "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js", "jquery.tinymce", "tiny_mce" %>
+  <%= csrf_meta_tags %>
+	<%= yield :head %>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="left-nav">
+			<ul>
+				<li>
+					<%= link_to "pages", pages_path %>
+				</li>
+				<li>
+					<%= link_to "categories", categories_path %>
+				</li>
+				<li>
+					<%= link_to "portfolio", items_path %>
+				</li>
+			</ul>
+		</div>
+		<div class="main">
+			<div>
+				<p class="notice"><%= notice %></p>
+				<p class="alert"><%= alert %></p>
+			</div>
+			<div class="inside">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+<%= yield :js_bottom %>
+</body>
+</html>

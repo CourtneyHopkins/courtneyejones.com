@@ -1,0 +1,46 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div style="width:50%; float:left;">
+  	<div class="field">
+	    <%= f.label :item_name %><br />
+	    <%= f.text_field :item_name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :position %><br />
+	    <%= f.number_field :position %>
+	  </div>
+	</div>
+	<div style="width:50%; float:left;">
+		<%= f.hidden_field :assignments, value: @item.categories.collect{|c| c.id}.join(",") %>
+		<div class="field">
+			<% Category.all.each do |c| %>
+				<input type="checkbox" value="<%= c.id %>" class="checker"<%= @item.categories.collect{|ca| ca.id }.include?(c.id) ? "checked=checked" : ""  %>> <%= c.category_name %></input>
+			<% end %>
+			<script type="text/javascript">
+				$(function() {
+					$(".checker").click(function() {
+						var arr = [];
+						$(".checker:checked").each(function() {
+							arr.push($(this).val());
+						})
+						$("#item_assignments").val(arr.join(","));
+					})
+				})
+			</script>
+		</div>
+	</div>
+	<div style="clear:left;"></div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

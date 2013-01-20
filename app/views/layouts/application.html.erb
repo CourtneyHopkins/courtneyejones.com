@@ -2,13 +2,27 @@
 <html>
 <head>
   <title>Cojo</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
+	<%= yield :topbar %>
+	<div class="left-nav" style="width:25%; float:left;">
+		<ul>
+			<% Page.all.each do |p| %>
+				<li>
+					<% if p.redirect.nil? || p.redirect.empty? %>
+						<%= link_to p.title, page_path(p.slug) %>
+					<% else %>
+						<%= link_to p.title, p.redirect %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
 <%= yield %>
 
 </body>

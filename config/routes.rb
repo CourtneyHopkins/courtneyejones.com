@@ -1,7 +1,7 @@
 Cojo::Application.routes.draw do
-  devise_for :users
+  resources :pages, :admin, :portfolio, :items, :categories
 
-  resources :pages
-  
-  root to: "pages#index"
+  devise_for :users
+    
+  root to: "pages#home"
 end

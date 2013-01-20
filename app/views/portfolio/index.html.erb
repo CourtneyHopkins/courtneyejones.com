@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="filters">
+		<ul style="display:inline;">
+			<% @categories.each do |c| %>
+				<li style="float:left;">
+					<%= link_to c.category_name, "#" %>
+				</li>
+			<% end %>
+		</ul>
+		<div style="clear:left;"></div>
+	</div>
+</div>
